@@ -4,16 +4,76 @@ using Autodesk.Navisworks.Api.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Application = Autodesk.Navisworks.Api.Application;
+using wf = System.Windows.Forms;
 
 namespace Lab4_Exercise
 {
     [PluginAttribute("Lab4_Exercise", "Hicas", DisplayName = "Lab4", ToolTip = "Clash Detection")]
-    public class MainClass : AddInPlugin
+    public class MainClassLab4 : AddInPlugin
     {
+        //public override int Execute(params string[] parameters)
+        //{
+        //    try
+        //    {
+        //        // current document
+        //        Document doc = Application.ActiveDocument;
+        //        // get current selected items
+        //        ModelItemCollection selectedItems = doc.CurrentSelection.SelectedItems;
+        //        if (selectedItems.Count == 0)
+        //        {
+        //            MessageBox.Show(Application.Gui.MainWindow, "No items selected.");
+        //            return 0;
+        //        }
+
+        //        // display message
+        //        StringBuilder message = new StringBuilder();
+
+        //        // each item from the current selected items
+        //        foreach (ModelItem item in selectedItems)
+        //        {
+        //            //// get modelitem's Element category by display name method
+        //            //PropertyCategory elementCategory = item.PropertyCategories.
+        //            //    FindCategoryByDisplayName("Element");
+        //            //if (elementCategory == null) { continue; }
+
+        //            foreach (PropertyCategory elementCategory in item.PropertyCategories)
+        //            {
+        //                // all properties of Element category
+        //                DataPropertyCollection dataProperties = elementCategory.Properties;
+        //                // display properties count 
+        //                message.Append(String.Format("[{0}] ModelItem's Element Category has {1} Properties.\n",
+        //                    Id.ToString(), dataProperties.Count));
+        //                // index
+        //                int index = 1;
+        //                // iterate properties
+        //                foreach (DataProperty dp in elementCategory.Properties)
+        //                {
+        //                    // append to display "Property Display Name & Property Value(includes DataType)"
+        //                    message.Append(String.Format("{0}. {1} => {2}\n", index, dp.DisplayName, dp.Value));
+        //                    // index increment
+        //                    index += 1;
+
+        //                }
+        //            }
+
+
+        //            // display message
+        //            wf.MessageBox.Show(message.ToString(), "Element Category");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        wf.MessageBox.Show(ex.Message);
+        //    }
+
+        //    return 0;
+        //}
+
         public override int Execute(params string[] parameters)
         {
             // current document
@@ -59,7 +119,7 @@ namespace Lab4_Exercise
                     }
 
                     // get item1 bounding box
-                    BoundingBox3D otherBox = otherItem.BoundingBox(true);          
+                    BoundingBox3D otherBox = otherItem.BoundingBox(true);
                     // check intersection of box1 vs box2
                     if (otherBox.Intersects(selectedBox))
                     {
